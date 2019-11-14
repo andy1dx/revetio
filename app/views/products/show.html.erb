@@ -1,0 +1,52 @@
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('/images/bg_1.jpg');" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-end justify-content-center">
+          <div class="col-md-9 ftco-animate pb-5 text-center">
+            <h1 class="mb-2 bread"><%= @product.title %></h1>
+            <p class="breadcrumbs"><span class="mr-2"><%= link_to root_path do %> ホーム <i class="ion-ios-arrow-forward"></i> <% end %></span> <span class="mr-2"><%= link_to products_path do %> 作品 <i class="ion-ios-arrow-forward"></i> <% end %></span> <span><%= @product.title %> <i class="ion-ios-arrow-forward"></i></span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ftco-section ftco-degree-bg">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 ftco-animate">
+            <p>
+              <img src="<%= @product.image %>" alt="" class="img-fluid">
+            </p>
+            <%= @product.description.html_safe %>
+            <%= link_to 'メッセージ送る', product_send_mail_path(@product.id), class: 'btn btn-primary' %>
+          </div> <!-- .col-md-8 -->
+          <div class="col-lg-4 sidebar ftco-animate">
+            <div class="sidebar-box ftco-animate">
+              <div class="categories">
+                <h3>アーティスト</h3>
+                <% @artists.each do |artist| %>
+                  <li><%= link_to artist_path(artist.id) do %><%= artist.name %> <span class="ion-ios-arrow-forward"></span><% end %></li>
+                <% end %>
+              </div>
+            </div>
+
+            <div class="sidebar-box ftco-animate">
+              <h3>最近の作品</h3>
+              <% @products_recent.each do |product_recent| %>
+                <div class="block-21 mb-4 d-flex">
+                  <a class="blog-img mr-4" style="background-image: url(<%= product_recent.image %>);"></a>
+                  <div class="text">
+                    <h3 class="heading"><%= link_to product_recent.title, product_path(product_recent.id) %></h3>
+                    <div class="meta">
+                      <div><a href="#"><span class="icon-gear"></span> <%= product_recent.craft %></a></div>
+                      <div><a href="#"><span class="icon-money"></span> <%= product_recent.target %></a></div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> <!-- .section -->
+    
